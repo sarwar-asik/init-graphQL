@@ -12,11 +12,7 @@ const books = [
       author: 'Paul Auster',
     },
   ];
-  const resolvers = {
-    Query: {
-      books: () => books,
-    },
-  };
+
 const typeDefs = `#graphql
 
   type Book {
@@ -29,6 +25,12 @@ const typeDefs = `#graphql
   }
 `;
 
+const resolvers = {
+    Query: {
+      books: () => books,
+    },
+  };
+  
 const server = new ApolloServer({
     typeDefs,
     resolvers,
