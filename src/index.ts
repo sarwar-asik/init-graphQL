@@ -1,6 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { db } from "./db.js";
+import typeDefs from "../gql/schema/index.js";
 
 const books = [
   {
@@ -13,24 +14,24 @@ const books = [
   },
 ];
 
-const typeDefs = `#graphql
+// const typeDefs = `#graphql
 
- type Product {
-      id: ID!,
-        name: String,
-        image: String,
-        description: String,
-        price:Float,
-        quantity: Int,
-        onStock: Boolean,
-        categoryId:  String
-        }
+//  type Product {
+//       id: ID!,
+//         name: String,
+//         image: String,
+//         description: String,
+//         price:Float,
+//         quantity: Int,
+//         onStock: Boolean,
+//         categoryId:  String
+//         }
 
-    type Query{
-        products:[Product],
-        product(productId:ID!):Product
-    }
-`;
+//     type Query{
+//         products:[Product],
+//         product(productId:ID!):Product
+//     }
+// `;
 
 const resolvers = {
   Query: {
@@ -38,7 +39,7 @@ const resolvers = {
     products: () => db.products,
     product: (parent: any, args: { productId: String }, context: any) => {
       const result = db.products.find((pro) => pro.id === args.productId);
-      console.log(result,"resss");
+    //   console.log(result,"resss");
       return result;
     },
   },
