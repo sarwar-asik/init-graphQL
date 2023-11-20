@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "compile": "tsc -w",
-    "start": "nodemon ./dist/index.js"
+    "start": "nodemon ./dist/src/index.js"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
