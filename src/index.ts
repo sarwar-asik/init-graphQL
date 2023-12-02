@@ -5,9 +5,12 @@ import { typeDefs } from "../gql/schema/index.js";
 import { resolvers } from "../gql/resolver/index.js";
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  typeDefs,   ///! for schema
+  resolvers, /// for resolver or model
 });
+
+
+
 const { url } = await startStandaloneServer(server, {
   listen: { port: 4000 },
 });
