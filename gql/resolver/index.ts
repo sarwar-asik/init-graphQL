@@ -11,6 +11,7 @@ export const resolvers = {
     categories: () => db.categories,
     category: (parent: any, args: { id: String }, context: any) => {
       const singleCategory = db.categories.find((cate) => cate.id === args.id);
+      // console.log(singleCategory)
 
       return singleCategory;
     },
