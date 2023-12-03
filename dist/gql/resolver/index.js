@@ -14,4 +14,18 @@ export const resolvers = {
             return singleCategory;
         },
     },
+    Product: {
+        category: (parent, args, context) => {
+            console.log(parent, "paretend");
+            const result = db.categories.find((category) => category.id === parent.categoryId);
+            return result;
+        },
+    },
+    Category: {
+        products: (parent, args, context) => {
+            console.log(parent, "parent");
+            const result = db.products.filter((product) => product.categoryId === parent.id);
+            return result;
+        },
+    },
 };

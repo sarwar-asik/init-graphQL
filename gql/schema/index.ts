@@ -9,11 +9,13 @@ export const typeDefs = `#graphql
         quantity: Int,
         onStock: Boolean,
         categoryId:  String
+        category:Category
         }
 
     type Category{
         id:ID!,
-        name:String
+        name:String,
+        products:[Product]
     }
 
     type Query{
