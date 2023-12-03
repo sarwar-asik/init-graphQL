@@ -9,6 +9,7 @@ const products = [
         "onStock": true,
         "categoryId": "4f7f61e5-96c2-445d-80fb-79f58e3d061b"
     },
+    
     {
         "id": "73b8ca8b-ca88-483e-99ea-2fedaf2a1dc1",
         "name": "Football",
@@ -197,6 +198,14 @@ const categories = [
     {
         "id": "97b84bd6-c11b-435f-8943-17dc97694451",
         "name": "Furniture"
+    },
+    {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Electronics"
+    },
+    {
+        "id": "00000000-0000-0000-0000-0000023r5423000",
+        "name": "Home"
     }
 ];
 

@@ -196,6 +196,14 @@ const categories = [
     {
         "id": "97b84bd6-c11b-435f-8943-17dc97694451",
         "name": "Furniture"
+    },
+    {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "Electronics"
+    },
+    {
+        "id": "00000000-0000-0000-0000-0000023r5423000",
+        "name": "Home"
     }
 ];
 const reviews = [
