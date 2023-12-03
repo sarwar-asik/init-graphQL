@@ -1,30 +1,45 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
+import jwt from "jsonwebtoken";
 
+export const prisma = new PrismaClient();
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
 
-  export const prisma = new PrismaClient();
-  interface IUser {
-    name : string,
-   email :  string ,
-   password :  string
-  }
-
-  export const resolvers = {
-    Query: {
-     
-      users:async()=>{
-        return await prisma.user.findMany({})
-      }
-
+export const resolvers = {
+  Query: {
+    users: async () => {
+      return await prisma.user.findMany({});
     },
-    Mutation:{
-      signup:async(parent:any,args:IUser,context:any)=>{
-        // console.log(args,"argss data");
-        return await prisma.user.create({
-          data:args
-        })
-      }
-    }
+  },
+  Mutation: {
+    signup: async (parent: any, args: IUser, context: any) => {
+      const hashedPass = await bcrypt.hash(args.password, 12);
+      // console.log(hashedPass,"hashed passs");
+      const createUser = await prisma.user.create({
+        data: {
+          name: args.name,
+          email: args.email,
+          password: hashedPass,
+        },
+      });
 
-  };
-  
+      const token = jwt.sign(
+        { userId: createUser.id, email: createUser.email },
+        "mySignature",
+        {
+          expiresIn: "1d",
+        }
+      );
+      console.log(token, "my jwt token");
+      return {
+        token,
+        user: createUser,
+      };
+    },
+  },
+};

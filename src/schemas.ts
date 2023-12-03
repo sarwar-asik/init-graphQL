@@ -7,9 +7,13 @@ type Query{
 
 
 type Mutation{
-  signup(name:String!,email:String!,password:String!):User
+  signup(name:String!,email:String!,password:String!):UserArgs
 }
 
+type UserArgs{
+  token:String
+    user:User
+}
 
 type Post {
   id:ID!
@@ -18,10 +22,7 @@ type Post {
   author:User
   createdAt:String!
   published:Boolean!
-
-
 }
-
 
 type User{
   id:ID!

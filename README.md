@@ -18,6 +18,11 @@
         npx tsc --init
         yarn add prisma
         npx @prisma/client
+        npm i bcrypt
+        npm install --save @types/bcrypt
+        yarn add jsonwebtoken
+
+
 
 ```
 
