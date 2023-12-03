@@ -9,8 +9,10 @@ export const typeDefs = `#graphql
         quantity: Int,
         onStock: Boolean,
         categoryId:  String
-        category:Category
-        }
+        category:Category,
+        reviews:[Review]    
+        
+    }
 
     type Category{
         id:ID!,
@@ -23,5 +25,12 @@ export const typeDefs = `#graphql
         product(productId:ID!):Product
         categories:[Category]
         category(id:ID!):Category
+    }
+    type Review{
+        id:ID!,
+        review:String,
+        rating:Float,
+        date:String,
+        productId:String,
     }
 `;

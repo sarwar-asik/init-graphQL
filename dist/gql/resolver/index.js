@@ -16,14 +16,18 @@ export const resolvers = {
     },
     Product: {
         category: (parent, args, context) => {
-            console.log(parent, "paretend");
+            // console.log(parent, "paretend");
             const result = db.categories.find((category) => category.id === parent.categoryId);
             return result;
+        },
+        reviews: (parent, args, context) => {
+            // console.log(parent, "parent: ");
+            return db.reviews.filter(review => review.productId === parent.id);
         },
     },
     Category: {
         products: (parent, args, context) => {
-            console.log(parent, "parent");
+            // console.log(parent, "parent");
             const result = db.products.filter((product) => product.categoryId === parent.id);
             return result;
         },
