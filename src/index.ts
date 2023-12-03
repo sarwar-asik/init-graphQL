@@ -1,18 +1,22 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-
-import { typeDefs } from "../gql/schema/index.js";
-import { resolvers } from "../gql/resolver/index.js";
+import { resolvers } from "./resolver";
+import { typeDefs } from "./schemas";
 
 const server = new ApolloServer({
-  typeDefs,   //! for schema
-  resolvers,  // ! for resolver or model
+  typeDefs,
+  resolvers,
 });
 
+const main = async () => {
+
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4001 },
+  });
+
+  console.log(`🚀  Server ready at: ${url}`)
+  
+};
 
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
-
-console.log(`🚀  Server ready at: ${url}`);
+main();
