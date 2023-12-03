@@ -33,7 +33,7 @@ export const resolvers = {
 
   Category: {
     products: ({id}, args, context) => {
-      // console.log(parent, "parent");
+     
       const result = db.products.filter(
         (product) => product.categoryId === id
       );
