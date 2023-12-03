@@ -1,20 +1,21 @@
 {
-  "name": "initGraphQL",
+  "name": "G-blogs",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/sarwar-asik/init-graphQL",
+  "author": "sarwar-asik <asikpc2022@gmail.com>",
   "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "compile": "tsc -w",
-    "start": "nodemon ./dist/src/index.js"
+  "scripts":{
+    "dev":"nodemon --watch './**/*.ts' --exec ts-node src/index.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@types/node": "^20.10.2",
     "graphql": "^16.8.1",
-    "nodemon": "^3.0.1"
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.2"
   },
   "devDependencies": {
-    "@types/node": "^20.9.2",
-    "typescript": "^5.2.2"
+    "nodemon": "^3.0.2"
   }
 }
