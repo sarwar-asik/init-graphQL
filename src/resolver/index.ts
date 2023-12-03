@@ -16,6 +16,9 @@ const books = [
   export const resolvers = {
     Query: {
       books: () => books,
+      users:async()=>{
+        return await prisma.user.findMany({})
+      }
 
     },
     Mutation:{
