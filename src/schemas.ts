@@ -8,7 +8,8 @@ type Query{
 
 type Mutation{
   signup(name:String!,email:String!,password:String!,bio:String):AuthPayload,
-  login(email:String,password:String):AuthPayload
+  login(email:String,password:String):AuthPayload,
+  createPost(title:String!,content:String!):Post
 }
 
 

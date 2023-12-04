@@ -66,4 +66,5 @@ export const Mutations= {
       },config.jwt.secret as string);
       return { token, user };
     },
+   
   }
