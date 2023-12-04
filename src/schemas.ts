@@ -9,13 +9,27 @@ type Query{
 type Mutation{
   signup(name:String!,email:String!,password:String!,bio:String):AuthPayload,
   login(email:String,password:String):AuthPayload,
-  createPost(title:String!,content:String!):Post
+  createPost(post:PostInput!):PostPayload,
+  updatePost(postId:ID!,post:PostInput):PostPayload,
+  deletePost(id:ID!):PostPayload
 }
 
 
+
+
 type AuthPayload{
+  userError:String | null
    token:String
-    user:User
+}
+
+type PostPayload{
+  postError:String
+  post:Post
+}
+
+input PostInput{
+  title:String
+  content:String
 }
 
 type Post {
