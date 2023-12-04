@@ -21,6 +21,7 @@
         npm i bcrypt
         npm install --save @types/bcrypt
         yarn add jsonwebtoken
+        yarn add dotenv
 
 
 

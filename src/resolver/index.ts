@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
+import { JwtHelpers } from "../utils/jwtHelpers";
+import config from "../config";
 
 export const prisma = new PrismaClient();
 interface IUser {
@@ -18,6 +20,16 @@ export const resolvers = {
   },
   Mutation: {
     signup: async (parent: any, args: IUser, context: any) => {
+      const isExist = await prisma.user.findFirst({
+        where: {
+          email: args.email,
+        },
+      });
+
+      if (isExist?.email) {
+        throw new Error(`User ${args.email} already registered`);
+      }
+
       const hashedPass = await bcrypt.hash(args.password, 12);
       // console.log(hashedPass,"hashed passs");
       const createUser = await prisma.user.create({
@@ -28,13 +40,10 @@ export const resolvers = {
         },
       });
 
-      const token = jwt.sign(
-        { userId: createUser.id, email: createUser.email },
-        "mySignature",
-        {
-          expiresIn: "1d",
-        }
-      );
+      const token =await JwtHelpers.createToken({
+        userId: createUser.id,
+        email: createUser.email,
+      },config.jwt.secret as string);
       console.log(token, "my jwt token");
       return {
         token,
@@ -42,29 +51,26 @@ export const resolvers = {
       };
     },
 
-  login:async(parent:any,args:any,context:any)=>{
-    const user =await prisma.user.findFirst({
-      where:{
-        email:args.email
-      }
-    })
-    console.log(user,"user login");
+    login: async (parent: any, args: any, context: any) => {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: args.email,
+        },
+      });
+      // console.log(user, "user login",config.jwt.secret );
 
-    if(!user){
-      throw new Error("User not found")
-    }
-    const isMatch = bcrypt.compareSync(args.password,user.password)
-    if(!isMatch){
-      throw new Error("Invalid password")
-    }
-    const token = jwt.sign(
-      {userId:user.id,email:user.email},
-      "mySignature",
-      {expiresIn:"1d"}
-    )
-    return {token,user}
-  }
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const isMatch = bcrypt.compareSync(args.password, user.password);
+      if (!isMatch) {
+        throw new Error("Invalid password");
+      }
+      const token =await JwtHelpers.createToken({
+        userId: user.id,
+        email: user.email,
+      },config.jwt.secret as string);
+      return { token, user };
+    },
   },
 };
-
-
