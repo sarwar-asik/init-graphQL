@@ -41,5 +41,30 @@ export const resolvers = {
         user: createUser,
       };
     },
+
+  login:async(parent:any,args:any,context:any)=>{
+    const user =await prisma.user.findFirst({
+      where:{
+        email:args.email
+      }
+    })
+    console.log(user,"user login");
+
+    if(!user){
+      throw new Error("User not found")
+    }
+    const isMatch = bcrypt.compareSync(args.password,user.password)
+    if(!isMatch){
+      throw new Error("Invalid password")
+    }
+    const token = jwt.sign(
+      {userId:user.id,email:user.email},
+      "mySignature",
+      {expiresIn:"1d"}
+    )
+    return {token,user}
+  }
   },
 };
+
+

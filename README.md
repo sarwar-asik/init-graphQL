@@ -163,3 +163,19 @@ npx prisma migrate dev
 yarn dev
 
 ```
+
+### Query in client 
+
+```ts
+
+mutation Registration($name: String!, $email: String!, $password: String!){
+  signup(name: $name, email: $email, password: $password) {
+  user {
+    email
+    id
+    name
+    password
+  }
+  }
+}
+```
