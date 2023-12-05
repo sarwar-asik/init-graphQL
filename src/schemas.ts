@@ -18,7 +18,7 @@ type Mutation{
 
 
 type AuthPayload{
-  userError:String | null
+  userError:String 
    token:String
 }
 
@@ -57,9 +57,6 @@ type Profile{
   createdAt:String!
   user:User!
 }
-
-
-
 
 
 `;
